@@ -28,6 +28,7 @@ class Sprite {
         }
         this.color = color
         this.isAttacking
+        this.health = 100
     }
 
     draw() {
@@ -167,7 +168,8 @@ function animate() {
         player.isAttacking
     ) {
         player.isAttacking = false
-        console.log('attacked')
+        enemy.health -= 20
+        document.querySelector('#enemyHealthTracker').style.width = enemy.health + '%'
     }
 
     if (
@@ -178,7 +180,8 @@ function animate() {
         enemy.isAttacking
     ) {
         enemy.isAttacking = false
-        console.log('enemy attack successful')
+        player.health -= 20
+        document.querySelector('#playerHealthTracker').style.width = player.health + '%'
     }
 }
 
@@ -218,7 +221,7 @@ window.addEventListener('keydown', (event) => {
             enemy.attack()
             break
     }
-    
+
 })
 
 window.addEventListener('keyup', (event) => {
