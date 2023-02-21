@@ -31,7 +31,7 @@ const shop = new Sprite({
 const controlButtons = new Sprite({
     position: {
         x: 0,
-        y: 0,
+        y: 60,
     }, 
     imageSrc: './img/controlButtons.png',
 })
@@ -185,6 +185,8 @@ function animate() {
     background.update()
     controlButtons.update()
     shop.update()
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.15)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
     player.update()
     enemy.update()
 
@@ -239,7 +241,9 @@ function animate() {
         enemy.takeHit()
         player.isAttacking = false
         
-        document.querySelector('#enemyHealthTracker').style.width = enemy.health + '%'
+        gsap.to('#enemyHealthTracker', {
+            width: enemy.health + '%'
+        })
     }
 
     // If player misses
@@ -258,7 +262,10 @@ function animate() {
     ) {
         player.takeHit()
         enemy.isAttacking = false
-        document.querySelector('#playerHealthTracker').style.width = player.health + '%'
+
+        gsap.to('#playerHealthTracker', {
+            width: player.health + '%'
+        })
     }
 
     // If enemy misses
